@@ -1,23 +1,644 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+    <!-- Schema.org Structured Data for Service Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "아파트 리모델링 및 인테리어 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "내집마련 인테리어 파트너",
+        "url": "https://yourdomain.com",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+82-10-1234-5678",
+          "contactType": "고객 서비스"
+        }
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "전국"
+      },
+      "description": "23평 아파트 리모델링 비용 분석 및 맞춤형 인테리어 솔루션 제공.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "리모델링 서비스 가격",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "23평 전체 리모델링"
+            },
+            "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "15000000",
+                "priceCurrency": "KRW",
+                "description": "전체 시공 기준 최저 가격"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "23평 부분 리모델링"
+            },
+            "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "3000000",
+                "priceCurrency": "KRW",
+                "description": "욕실/주방 등 부분 시공 기준 가격"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+
+    <style>
+        /* CSS Reset and Global Styles */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background-color: #f8f9fa; /* Soft light gray background */
+            color: #333;
+        }
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            overflow: hidden; /* Clear floats */
+        }
+
+        /* Header and Navigation Styles */
+        header {
+            background-color: #4CAF50; /* A soft green color for trust and nature */
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid #388E3C;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+        nav {
+            background-color: #f1f8e9; /* Light green for nav background */
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        nav a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.2rem 0;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #4CAF50;
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content Headings */
+        h2 {
+            font-size: 1.8rem;
+            color: #388E3C;
+            border-left: 5px solid #4CAF50;
+            padding-left: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 1.5rem;
+            color: #555;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Call to Action Buttons */
+        .cta-button {
+            display: block;
+            background-color: #FF7043; /* Soft orange/coral color */
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 1.5rem auto;
+            max-width: 300px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .cta-button:hover {
+            background-color: #F4511E;
+        }
+
+        /* Section Specific Styles */
+        section {
+            padding: 2rem;
+        }
+        .intro-container {
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 2rem;
+        }
+
+        /* Keyword Tags Section */
+        .keyword-tags {
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f1f8e9;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .keyword-tags a {
+            background-color: #e8f5e9;
+            color: #4CAF50;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid #c8e6c9;
+            transition: background-color 0.3s ease;
+        }
+        .keyword-tags a:hover {
+            background-color: #c8e6c9;
+        }
+
+        /* Tables and Data Presentation */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: 700;
+        }
+        td {
+            background-color: #ffffff;
+        }
+
+        /* FAQ Accordion */
+        dl dt {
+            font-weight: 700;
+            margin-top: 1rem;
+            cursor: pointer;
+            color: #388E3C;
+            padding: 1rem;
+            background-color: #f1f8e9;
+            border-radius: 6px;
+            border-left: 5px solid #4CAF50;
+            transition: background-color 0.3s ease;
+        }
+        dl dt:hover {
+            background-color: #e8f5e9;
+        }
+        dl dd {
+            margin-left: 0;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #ffffff;
+            border: 1px solid #eee;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            display: none;
+        }
+        dl dt.active + dd {
+            display: block;
+        }
+
+        /* Form Elements for Dwell Time */
+        .form-container {
+            background-color: #f8f8f8;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="tel"],
+        .form-container select,
+        .form-container textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #777;
+            background-color: #f0f0f0;
+            margin-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        /* New section specific for graphs/visuals */
+        .visual-data {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .visual-data h3 {
+            border-bottom: none;
+        }
+        .visual-data ul {
+            list-style: none;
+            padding: 0;
+        }
+        .visual-data li {
+            background-color: #e8f5e9;
+            margin-bottom: 0.5rem;
+            padding: 1rem;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bar-chart {
+            background-color: #4CAF50;
+            height: 20px;
+            border-radius: 2px;
+            text-align: right;
+            color: white;
+            font-weight: 700;
+            line-height: 20px;
+            padding-right: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>2026년 23평 아파트 리모델링 비용 완벽 가이드</h1>
+        <p>합리적인 인테리어 견적 비교와 절약 노하우, 내돈내산 성공 전략 공개</p>
+    </header>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+        <ul>
+            <li><a href="#cost-guide">평균 비용 분석</a></li>
+            <li><a href="#cost-breakdown">항목별 견적</a></li>
+            <li><a href="#regional-variation">지역별 가격 차이</a></li>
+            <li><a href="#process-tips">리모델링 순서 및 팁</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">무료 견적 문의</a></li>
+        </ul>
     </nav>
+
     <main>
-      <h1>Home page</h1>
+        <section id="cost-guide">
+            <div class="intro-container">
+                <h2>23평 리모델링 비용, 2026년 최신 예상 견적은?</h2>
+                <p>23평 아파트 리모델링을 계획하고 계신가요? 많은 분들이 가장 궁금해하는 부분은 역시 <strong>23평 리모델링 비용</strong>일 것입니다. 20평대 아파트는 신혼부부부터 3인 가족까지 다양한 형태로 거주하며, 리모델링 수요가 가장 많은 평수 중 하나입니다. 하지만 인테리어는 공사 범위와 자재에 따라 <strong>비용</strong> 차이가 크기 때문에, 정확한 <strong>예상 금액</strong>을 파악하기 어렵습니다.</p>
+                <p><strong>23평 인테리어 견적</strong>은 단순히 평당 가격으로 계산하기보다는, <strong>부분 리모델링</strong>인지 <strong>전체 리모델링</strong>인지, 어떤 자재를 선택하는지에 따라 천차만별입니다. 본 가이드는 2026년도 최신 인테리어 시장 동향을 반영하여 <strong>23평 아파트 리모델링 비용</strong>을 A부터 Z까지 상세하게 분석하고, 합리적으로 <strong>리모델링 금액</strong>을 절약할 수 있는 실질적인 노하우를 제공합니다. 이 가이드를 통해 <strong>23평 리모델링 평균 비용</strong>을 확인하고, <strong>저렴한곳</strong>을 찾는 방법을 알아보세요.</p>
+            </div>
+            
+            <div class="visual-data">
+                <h3>23평 리모델링 평균 비용 시뮬레이션 (2026년 기준)</h3>
+                <p>아래는 2026년 기준 23평 아파트의 리모델링 범위별 대략적인 <strong>예상 비용</strong>을 시각화한 표입니다. 이는 자재 등급(일반/고급), 공사 범위(전체/부분), 시공업체(개인/브랜드)에 따라 크게 달라질 수 있습니다.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>리모델링 범위</th>
+                            <th>예상 비용 (시작 금액)</th>
+                            <th>주요 공사 항목</th>
+                            <th>주요 키워드</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>부분 리모델링 (Simple)</strong></td>
+                            <td>300만원 ~ 800만원</td>
+                            <td>도배, 장판/마루 교체, 조명, 싱크대 상판 교체</td>
+                            <td>23평 부분 리모델링, 인테리어 비용 절약, 가성비 인테리어</td>
+                        </tr>
+                        <tr>
+                            <td><strong>부분 리모델링 (Core)</strong></td>
+                            <td>800만원 ~ 1,500만원</td>
+                            <td>도배, 바닥 전체 교체, 조명, 욕실 1개, 싱크대 교체</td>
+                            <td>23평 주방 인테리어 비용, 23평 욕실 인테리어 견적</td>
+                        </tr>
+                        <tr>
+                            <td><strong>전체 리모델링 (Standard)</strong></td>
+                            <td>1,500만원 ~ 2,500만원</td>
+                            <td>전체 철거, 기본 자재(도배/마루), 주방/욕실 1개 전체, 샤시 부분 교체</td>
+                            <td>23평 전체 리모델링 비용, 아파트 인테리어 평균 금액</td>
+                        </tr>
+                        <tr>
+                            <td><strong>전체 리모델링 (Premium)</strong></td>
+                            <td>2,500만원 ~ 4,000만원+</td>
+                            <td>전체 철거, 고급 자재(원목 마루, 수입 타일), 확장 공사, 전체 샤시 교체</td>
+                            <td>23평 인테리어 고급 견적, 23평 리모델링 럭셔리, 인테리어 시공사 추천</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="text-align: right; font-size: 0.85rem; color: #777; margin-top: 10px;">*상기 금액은 2026년 물가 상승률을 반영한 대략적인 추정치이며, 현장 상황에 따라 변동될 수 있습니다.</p>
+            </div>
+
+            <a href="#contact" class="cta-button" aria-label="맞춤형 23평 리모델링 견적 문의하기">23평 맞춤 견적 1:1 상담 신청</a>
+        </section>
+
+        <section id="cost-breakdown">
+            <h2>23평 리모델링 항목별 상세 비용 분석 (인테리어 항목별)</h2>
+            <p><strong>23평 인테리어</strong>는 어떤 항목에 집중하느냐에 따라 <strong>비용</strong>이 크게 달라집니다. 특히 주방과 욕실 공사는 전체 <strong>리모델링 금액</strong>의 상당 부분을 차지하며, 자재 선택의 폭이 넓어 <strong>평균 시세</strong>와 큰 <strong>차이점</strong>을 보일 수 있습니다. 각 항목별 <strong>예상 비용</strong>을 자세히 살펴보겠습니다.</p>
+            
+            <h3>1. 주방 리모델링 비용 (싱크대, 타일, 조명)</h3>
+            <p>주방은 <strong>23평 아파트 리모델링</strong> 시 가장 큰 만족도를 주는 공간입니다. 싱크대 교체는 <strong>주방 인테리어</strong>의 핵심이며, 상판 자재(인조대리석, 엔지니어드 스톤 등)와 수납장 도어 마감재(하이그로시, 무광PET 등)에 따라 <strong>가격</strong>이 결정됩니다. 23평 아파트 주방의 <strong>싱크대 교체 비용</strong>은 보통 200만원에서 500만원 이상까지 다양합니다. <strong>주방 타일</strong>과 조명 교체는 비교적 저렴하지만, 주방 확장 공사나 아일랜드 식탁 추가 시 <strong>리모델링 금액</strong>이 상승합니다.</p>
+
+            <h3>2. 욕실 리모델링 비용 (화장실, 타일, 수전)</h3>
+            <p>23평 아파트에는 보통 욕실이 1개 또는 2개가 있습니다. <strong>욕실 리모델링 비용</strong>은 <strong>방수 공사 유무</strong>, 타일 종류, 변기 및 세면대 등 위생도기 등급에 따라 크게 달라집니다. <strong>23평 욕실 인테리어 견적</strong>은 일반적으로 욕실 1개당 250만원에서 400만원 정도가 <strong>평균 금액</strong>입니다. <strong>내돈내산 후기</strong>를 보면, 저렴한 <strong>인테리어 싼곳</strong>을 찾으면 200만원 초반대도 가능하지만, 꼼꼼한 방수 처리가 중요하므로 전문 시공업체 선정이 필수입니다.</p>
+
+            <h3>3. 거실 및 방 리모델링 비용 (도배, 마루, 샤시)</h3>
+            <p>가장 큰 면적을 차지하는 거실과 방의 공사 항목입니다. <strong>23평 도배 비용</strong>은 실크벽지와 합지벽지에 따라 <strong>가격 차이점</strong>이 있습니다. 합지는 비교적 <strong>저렴한곳</strong>에서 100만원 내외로 가능하지만, 실크벽지는 150만원 이상이 소요됩니다. <strong>바닥재</strong>는 마루(강마루, 강화마루, 원목마루)와 장판(2.2T, 3.0T) 중 선택하며, <strong>마루 시공 비용</strong>은 장판 대비 2배 이상 <strong>가격</strong>이 높습니다. <strong>23평 샤시 교체 비용</strong>은 샷시 종류(단창/이중창)와 브랜드(LG, KCC 등)에 따라 <strong>금액</strong>이 크게 달라지며, <strong>리모델링 예산</strong>을 크게 좌우하는 항목입니다.</p>
+            
+            <p><strong><a href="https://www.google.com/search?q=23평+리모델링+비용+절약+방법" target="_blank">리모델링 비용 절약 방법 (외부 링크 참조)</a></strong></p>
+
+        </section>
+
+        <section id="regional-variation">
+            <h2>지역별 23평 리모델링 비용 차이 분석: 서울 vs. 지방</h2>
+            <p><strong>23평 인테리어 비용</strong>은 지역별로 상당한 <strong>차이점</strong>을 보입니다. 인건비와 자재 물류비용의 영향이 크기 때문입니다. 특히 <strong>서울 리모델링 비용</strong>은 <strong>지방 리모델링 비용</strong>에 비해 10~20%가량 높게 책정되는 경우가 많습니다. <strong>수도권</strong>(<strong>서울, 경기, 인천</strong>) 지역은 인건비와 주거 비용이 높아 <strong>인테리어 시세</strong>도 높게 형성됩니다.</p>
+            <p>반면, <strong>부산 리모델링 비용</strong>, <strong>대구 인테리어 견적</strong>, <strong>광주 리모델링 가격</strong> 등 지방 광역시의 경우, 경쟁 업체가 많아 상대적으로 <strong>저렴한곳</strong>을 찾기 쉽습니다. 하지만 <strong>강원도</strong>나 <strong>제주도</strong>와 같이 외곽 지역은 물류비용 때문에 오히려 <strong>리모델링 금액</strong>이 올라갈 수 있습니다. 따라서 <strong>안산 리모델링</strong>, <strong>수원 인테리어</strong>, <strong>용인 리모델링</strong> 등 특정 지역 <strong>23평 리모델링 전문 업체</strong>를 찾는 것이 중요합니다.</p>
+            <p><strong>전국 주요 도시 23평 리모델링 평균 비용 비교</strong></p>
+            <div class="visual-data">
+                <ul>
+                    <li><strong>서울</strong><div class="bar-chart" style="width: 85%;">85% (상대 비교)</div></li>
+                    <li><strong>경기도 (수원/성남)</strong><div class="bar-chart" style="width: 78%;">78%</div></li>
+                    <li><strong>부산/대구</strong><div class="bar-chart" style="width: 70%;">70%</div></li>
+                    <li><strong>광주/대전</strong><div class="bar-chart" style="width: 65%;">65%</div></li>
+                    <li><strong>제주도</strong><div class="bar-chart" style="width: 90%;">90% (물류비 상승 요인)</div></li>
+                </ul>
+            </div>
+
+            <p><strong>[참고] 정부 지원 사업 확인:</strong> <strong><a href="https://www.google.com/search?q=정부+주거환경개선사업" target="_blank">국토교통부 주거환경개선사업 (외부 링크)</a></strong></p>
+            <p><strong>[참고] 지역별 인테리어 업체 순위:</strong> <strong><a href="https://www.google.com/search?q=지역별+인테리어+업체+순위" target="_blank">지역별 리모델링 업체 평판 확인 (외부 링크)</a></strong></p>
+
+            <h3>리모델링 비용 절약 노하우: 내돈내산 성공 후기 따라하기</h3>
+            <p><strong>23평 리모델링</strong>을 성공적으로 완료한 <strong>내돈내산 후기</strong>들을 살펴보면 공통점이 있습니다. 바로 '철저한 준비'와 '적절한 타협'입니다. <strong>리모델링 금액</strong>을 절약하기 위한 핵심 노하우는 다음과 같습니다.</p>
+            <ol>
+                <li><strong>공사 범위 축소:</strong> 꼭 필요한 부분만 <strong>부분 리모델링</strong>을 진행하고, 비교적 상태가 좋은 부분(예: 문틀, 붙박이장)은 그대로 유지하여 <strong>비용</strong>을 아낍니다.</li>
+                <li><strong>자재 등급 조절:</strong> 눈에 잘 띄지 않는 공간(예: 세탁실, 다용도실)의 자재는 저가형을 사용하고, 거실이나 주방 등 핵심 공간에 예산을 집중합니다. <strong>23평 인테리어</strong>에서 자재비는 <strong>리모델링 금액</strong>의 40% 이상을 차지하므로, 자재 선택이 중요합니다.</li>
+                <li><strong>비수기 활용:</strong> 이사 성수기(봄, 가을)를 피해 겨울철에 <strong>인테리어 시공</strong>을 진행하면 <strong>리모델링 비용</strong>을 절감할 수 있는 <strong>장점</strong>이 있습니다.</li>
+                <li><strong>견적 비교:</strong> 최소 3곳 이상의 <strong>인테리어 업체</strong>에서 <strong>23평 리모델링 견적</strong>을 받아 <strong>비용</strong>과 서비스 수준을 비교해야 합니다. 무조건 <strong>저렴한곳</strong>만 찾기보다는 꼼꼼한 시공 능력을 확인하세요.</li>
+            </ol>
+        </section>
+
+        <section id="process-tips">
+            <h2>23평 리모델링 공사 순서와 유의사항 (장단점 분석)</h2>
+            <p>성공적인 <strong>23평 아파트 리모델링</strong>은 체계적인 순서에 따라 진행되어야 합니다. 공사 순서를 미리 파악하면 불필요한 <strong>추가 비용</strong> 발생을 막을 수 있습니다.</p>
+            <h3>1. 전체 리모델링 vs. 부분 리모델링 장단점 비교</h3>
+            <p><strong>전체 리모델링</strong>은 집의 전체적인 분위기를 바꾸고, 단열 및 방수 등 기능적인 문제까지 해결할 수 있다는 <strong>장점</strong>이 있습니다. 하지만 <strong>리모델링 비용</strong>이 높고 공사 기간이 길어 임시 거처가 필요하다는 <strong>단점</strong>이 있습니다. <strong>부분 리모델링</strong>은 <strong>인테리어 비용</strong>이 상대적으로 저렴하고 공사 기간이 짧아 거주 중에도 진행이 가능하다는 <strong>장점</strong>이 있지만, 전체적인 통일성을 해칠 수 있고 노후된 샤시나 배관 교체 같은 근본적인 문제를 해결할 수 없다는 <strong>단점</strong>이 있습니다.</p>
+
+            <h3>2. 리모델링 공사 순서 가이드</h3>
+            <p><strong>23평 리모델링 공사</strong>는 일반적으로 다음과 같은 순서로 진행됩니다. <strong>23평 인테리어</strong>는 좁은 공간에서 동선 관리가 중요하므로, 시공 순서를 잘 지켜야 합니다.</p>
+            <ul>
+                <li><strong>철거 공사:</strong> 기존 샷시, 싱크대, 욕실 타일 및 위생도기, 벽지 등 노후된 부분을 제거합니다. (약 1~2일 소요)</li>
+                <li><strong>설비 공사:</strong> 배관 교체, 방수 공사, 단열 보강 등 핵심적인 기능 개선 공사를 진행합니다. (약 1~3일 소요)</li>
+                <li><strong>목공 공사:</strong> 몰딩, 걸레받이, 문틀 교체, 가벽 설치 등 집의 기본 틀을 잡습니다. (약 2~4일 소요)</li>
+                <li><strong>타일 공사:</strong> 욕실, 주방, 현관 바닥 등 타일 시공을 진행합니다. (약 2~3일 소요)</li>
+                <li><strong>도배/페인트:</strong> 벽지 시공 및 페인트칠을 합니다. (약 1~2일 소요)</li>
+                <li><strong>바닥 공사:</strong> 마루 또는 장판 시공을 합니다. (약 1일 소요)</li>
+                <li><strong>가구 및 조명 설치:</strong> 싱크대, 붙박이장, 조명 등을 설치하여 마무리합니다. (약 2일 소요)</li>
+            </ul>
+        </section>
+        
+        <section id="input-fields-engagement">
+            <h2>무료 리모델링 예상 견적 계산기 (체류 시간 증진)</h2>
+            <p>23평 아파트 리모델링 예상 <strong>비용</strong>을 직접 계산해 보세요. 공사 항목을 선택하면 대략적인 <strong>견적 금액</strong>을 예측할 수 있습니다. 입력란을 통해 <strong>23평 인테리어 비용</strong>을 파악하고 상담을 요청하세요.</p>
+            <div class="form-container">
+                <form id="quote-calculator">
+                    <h3>내 23평 리모델링 예상 비용 시뮬레이션</h3>
+                    <div class="form-group">
+                        <label for="scope">1. 공사 범위 선택:</label>
+                        <select id="scope" name="scope" required>
+                            <option value="">-- 선택 --</option>
+                            <option value="full">전체 리모델링 (23평 전체)</option>
+                            <option value="part">부분 리모델링 (주방+욕실)</option>
+                            <option value="simple">간단 인테리어 (도배+장판)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bathroom">2. 욕실 개수 (23평 평균 1~2개):</label>
+                        <select id="bathroom" name="bathroom" required>
+                            <option value="">-- 선택 --</option>
+                            <option value="1">욕실 1개</option>
+                            <option value="2">욕실 2개</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="floor">3. 바닥재 종류:</label>
+                        <select id="floor" name="floor">
+                            <option value="장판">장판 시공 (저가형)</option>
+                            <option value="강마루">강마루 시공 (표준형)</option>
+                            <option value="원목마루">원목마루 시공 (고급형)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="option">4. 추가 옵션 선택 (샤시 교체 유무):</label>
+                        <select id="option" name="option">
+                            <option value="no">샤시 교체 없음</option>
+                            <option value="yes">샤시 전체 교체</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="region">5. 이사 지역:</label>
+                        <input type="text" id="region" name="region" placeholder="ex) 경기도 용인시, 부산 해운대구">
+                    </div>
+                    <button type="button" onclick="calculateQuote()">예상 견적 확인하기</button>
+                    <div id="result-display" style="margin-top: 15px; font-weight: 700; color: #FF7043;"></div>
+                </form>
+            </div>
+
+            <p><strong>[참고] 견적 문의 시 유의사항:</strong> <strong><a href="https://www.google.com/search?q=인테리어+견적+비교+노하우" target="_blank">인테리어 견적 비교 및 계약 시 유의사항 (외부 링크)</a></strong></p>
+            <p><strong>[참고] 인테리어 가이드:</strong> <strong><a href="https://www.google.com/search?q=인테리어+정보+나무위키" target="_blank">인테리어 시공 및 자재 정보 (나무위키)</a></strong></p>
+
+            <h3>23평 리모델링 업체 선택 시 체크리스트</h3>
+            <p><strong>저렴한곳</strong>만 찾다가 <strong>인테리어 시공</strong>에 실패하는 경우가 많습니다. <strong>23평 리모델링</strong>은 규모가 작아도 신중하게 업체를 선택해야 합니다. <strong>추천</strong> 업체를 선정할 때 다음 사항을 확인하세요.</p>
+            <ul>
+                <li><strong>사업자 등록 여부:</strong> 정식 사업자 등록이 되어 있는지 확인합니다.</li>
+                <li><strong>시공 경험:</strong> <strong>20평대 리모델링</strong> 경험이 풍부한지 <strong>내돈내산 후기</strong>를 통해 확인합니다.</li>
+                <li><strong>책임 보험 가입:</strong> 공사 중 문제 발생 시 보상 가능한 보험에 가입되어 있는지 확인합니다.</li>
+                <li><strong>A/S 기간 명시:</strong> 계약서에 A/S 기간 및 범위가 명확하게 명시되어 있는지 확인합니다.</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">23평 리모델링 기간은 얼마나 걸리나요?</dt>
+                <dd><strong>23평 전체 리모델링</strong>을 기준으로, 철거부터 마무리까지 약 2~3주 정도가 소요됩니다. <strong>부분 리모델링</strong>은 1주일 이내로 단축될 수 있습니다. <strong>추가 비용</strong> 발생을 막으려면 공사 기간을 여유 있게 잡는 것이 좋습니다.</dd>
+                <dt tabindex="0" aria-expanded="false">23평 리모델링 시 추가 비용이 발생할 수 있나요?</dt>
+                <dd>네, 있습니다. 초기 <strong>견적</strong>에 포함되지 않은 <strong>샤시 교체</strong>나 <strong>확장 공사</strong>, 그리고 예상치 못한 노후 배관 문제(누수 등)가 발견되면 <strong>추가 비용</strong>이 발생합니다. 계약서 작성 시 추가 비용 발생 가능 항목을 명확히 하는 것이 중요합니다.</dd>
+                <dt tabindex="0" aria-expanded="false">23평 아파트 리모델링, 언제 하는 것이 가장 좋을까요?</dt>
+                <dd>인테리어 성수기는 봄(3월~5월)과 가을(9월~11월)입니다. <strong>리모델링 금액</strong>을 절약하고 싶다면 비수기인 겨울철을 이용하는 것이 <strong>장점</strong>이 있습니다. 하지만 추위로 인해 시공 품질에 영향을 줄 수 있으니 꼼꼼한 확인이 필요합니다.</dd>
+                <dt tabindex="0" aria-expanded="false">인테리어 시공사 vs. 셀프 인테리어의 장단점은 무엇인가요?</dt>
+                <dd><strong>시공사</strong>는 전문적인 시공과 빠른 공사 완료라는 <strong>장점</strong>이 있습니다. <strong>셀프 인테리어</strong>는 <strong>23평 리모델링 비용</strong>을 절약할 수 있다는 <strong>장점</strong>이 있지만, <strong>단점</strong>으로는 시공 품질이 떨어질 수 있고, 상당한 시간과 노력이 필요하다는 점입니다.</dd>
+            </dl>
+        </section>
+
+        <section id="contact">
+            <h2>23평 리모델링 무료 견적 문의 (전국)</h2>
+            <p><strong>23평 리모델링</strong>, <strong>23평 인테리어 금액</strong>에 대한 고민을 해결해 드립니다. <strong>서울, 경기, 인천, 부산, 대구, 광주, 대전, 울산, 세종, 강원, 충청, 전라, 경상, 제주</strong> 등 전국 어디든 전문 상담이 가능합니다. 지금 바로 연락하여 <strong>저렴한곳</strong>의 <strong>견적</strong>을 받아보세요.</p>
+            <div class="form-container">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">이름:</label>
+                        <input type="text" id="name" name="name" required placeholder="이름을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">연락처:</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="예: 010-1234-5678">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">이사/거주 지역:</label>
+                        <input type="text" id="location" name="location" required placeholder="예: 경기도 안산시 상록구">
+                    </div>
+                    <div class="form-group">
+                        <label for="details">문의 내용 (리모델링 범위 등):</label>
+                        <textarea id="details" name="details" rows="5" placeholder="궁금한 점을 자세히 남겨주세요"></textarea>
+                    </div>
+                    <button type="submit">무료 상담 신청</button>
+                </form>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <script>
+        // FAQ 아코디언 기능 (접기/펼치기)
+        document.querySelectorAll('dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const isActive = dt.classList.contains('active');
+                // Close all other open items before opening a new one
+                document.querySelectorAll('dl dt').forEach(otherDt => {
+                    otherDt.classList.remove('active');
+                    otherDt.setAttribute('aria-expanded', 'false');
+                });
+
+                if (!isActive) {
+                    dt.classList.add('active');
+                    dt.setAttribute('aria-expanded', 'true');
+                }
+            });
+            dt.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dt.click();
+                }
+            });
+        });
+
+        // Simple cost calculation simulation script for dwell time increase
+        function calculateQuote() {
+            const scope = document.getElementById('scope').value;
+            const bathroom = parseInt(document.getElementById('bathroom').value);
+            const floor = document.getElementById('floor').value;
+            const option = document.getElementById('option').value;
+
+            if (!scope || !bathroom) {
+                document.getElementById('result-display').innerText = "공사 범위와 욕실 개수를 선택해 주세요.";
+                return;
+            }
+
+            let baseCost = 0;
+            let range = [0, 0]; // min, max range
+
+            // 1. Base cost by scope (approximate)
+            if (scope === 'full') {
+                baseCost = 15000000;
+                range = [15000000, 25000000];
+            } else if (scope === 'part') {
+                baseCost = 8000000;
+                range = [8000000, 15000000];
+            } else { // simple
+                baseCost = 3000000;
+                range = [3000000, 8000000];
+            }
+
+            // 2. Adjustments by floor material (relative increase)
+            if (floor === '강마루') {
+                baseCost += 1000000;
+                range[1] += 2000000;
+            } else if (floor === '원목마루') {
+                baseCost += 3000000;
+                range[1] += 4000000;
+            }
+
+            // 3. Adjustments by extra options (shutter replacement)
+            if (option === 'yes') {
+                baseCost += 4000000;
+                range[1] += 5000000;
+            }
+
+            // 4. Adjustments by number of bathrooms (second bathroom adds cost)
+            if (bathroom === 2) {
+                baseCost += 3000000;
+                range[1] += 3000000;
+            }
+
+            // Final display with formatted currency
+            const minFormatted = new Intl.NumberFormat('ko-KR').format(range[0]);
+            const maxFormatted = new Intl.NumberFormat('ko-KR').format(range[1]);
+
+            document.getElementById('result-display').innerHTML = `<strong>예상 견적: ${minFormatted}원 ~ ${maxFormatted}원</strong><br><em>*정확한 견적은 현장 방문 상담 후 결정됩니다.</em>`;
+        }
+    </script>
+
+  
